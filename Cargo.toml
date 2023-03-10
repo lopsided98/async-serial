@@ -1,63 +1,28 @@
 [package]
-name = "tokio-serial"
-version = "5.4.4"
-authors = ["Zac Berkowitz <zac.berkowitz@gmail.com>"]
-description = "A serial port implementation for tokio"
+name = "async-serial"
+version = "0.1.0"
+authors = ["Ben Wolsieffer <benwolsieffer@gmail.com>", "Zac Berkowitz <zac.berkowitz@gmail.com>"]
+description = "An async serial port implementation"
 license = "MIT"
-homepage = "https://github.com/berkowski/tokio-serial"
-repository = "https://github.com/berkowski/tokio-serial"
-documentation = "http://docs.rs/tokio-serial"
+repository = "https://github.com/lopsided98/async-serial"
+documentation = "http://docs.rs/async-serial"
 readme = "README.md"
-keywords = ["rs232", "serial", "tokio"]
+keywords = ["rs232", "serial"]
 categories = ["asynchronous", "hardware-support"]
 edition = "2018"
 
 [package.metadata]
 msrv = "1.46.0"
 
+[dependencies]
+async-io = "1.12.0"
+futures = "0.3"
+mio-serial = { version = "5.0.5", default-features = false }
+
 [features]
 default = []
 libudev = ["mio-serial/libudev"]
-rt = ["tokio/rt-multi-thread"]
-codec = ["tokio-util/codec", "bytes"]
-
-[dependencies.futures]
-version = "0.3"
-
-[dependencies.tokio]
-version = "^1.8"
-default-features = false
-features = ["net"]
-
-[dependencies.tokio-util]
-version = "0.7"
-default-features = false
-optional = true
-
-[dependencies.mio-serial]
-version = "5.0.3"
-default-features = false
-
-[dependencies.bytes]
-version = "1"
-default-features = false
-optional = true
-
-[dependencies.log]
-version = "0.4"
-
-[dependencies.cfg-if]
-version = "1"
-
-[dev-dependencies.tokio]
-version = "^1.8"
-features = ["macros", "rt", "process", "time", "fs", "io-util"]
-default-features = false
-
-[dev-dependencies.env_logger]
-version = "0.10.0"
 
 [[example]]
 name = "serial_println"
 path = "examples/serial_println.rs"
-required-features = ["rt", "codec"]
